@@ -32,7 +32,7 @@ function custom_message_post_registration($form, FormStateInterface $form_state)
   \Drupal::messenger()->addStatus(t('Welcome! Your registration has been successfully completed.'));
 }
 
-////phone number validation/////
+
 
 
 
