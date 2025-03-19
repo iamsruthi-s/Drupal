@@ -1,0 +1,6 @@
+name: 'Drupal Screen'
+type: theme
+base theme: olivero
+description: 'A custom theme for Drupal with responsive images'
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10

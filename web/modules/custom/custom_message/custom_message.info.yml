@@ -1,0 +1,7 @@
+name: 'Custom Message'
+type: module
+description: 'Alters the registration success message.'
+core_version_requirement: ^10
+package: custom_message
+dependencies:
+  - drupal:user

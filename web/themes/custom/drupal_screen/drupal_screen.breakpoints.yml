@@ -1,0 +1,32 @@
+drupal_screen.mobile:
+  label: 'Mobile'
+  mediaQuery: '(min-width: 0px)'
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+  image_styles:
+    1x: mobile_x1
+    2x: mobile_x2
+
+drupal_screen.narrow:
+  label: 'Narrow'
+  mediaQuery: 'all and (min-width: 560px) and (max-width: 850px)'
+  weight: 1
+  multipliers:
+    - 1x
+    - 2x
+  image_styles:
+    1x: narrow_x1
+    2x: narrow_x2
+
+drupal_screen.wide:
+  label: 'Wide'
+  mediaQuery: 'all and (min-width: 851px)'
+  weight: 2
+  multipliers:
+    - 1x
+    - 2x
+  image_styles:
+    1x: wide_x1
+    2x: wide_x2

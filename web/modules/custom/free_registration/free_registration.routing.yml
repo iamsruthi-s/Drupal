@@ -1,0 +1,21 @@
+free_registration.bursary_form:
+  path: '/pre_registration/{c_id}/{status}'
+  defaults:
+    _form: '\Drupal\free_registration\Form\BursaryForm'
+  requirements:
+    _access: 'TRUE'
+free_registration.validation:
+  path: 'pre_registration_validation/{c_id}/{email}'
+  defaults:
+    _controller: '\Drupal\free_registration\Controller\PreRegistrationController::pre_registration'
+    _title: ''
+  requirements:
+    _access: 'TRUE'
+free_registration.success:
+  path: 'pre_registration_completion/{c_id}'
+  defaults:
+    _controller: '\Drupal\free_registration\Controller\PreRegistrationController::success'
+    _title: ''
+  requirements:
+    _access: 'TRUE'        
+
