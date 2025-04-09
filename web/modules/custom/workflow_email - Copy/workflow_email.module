@@ -1,0 +1,71 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_alter() to modify the user registration form.
+ */
+function workflow_email_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+  // Remove password fields
+  unset($form['account']['pass']);
+
+  // Add a custom submit handler
+  $form['actions']['submit']['#submit'][] = 'workflow_email_register_submit';
+}
+
+/**
+ * Custom user registration form submit handler.
+ */
+function workflow_email_register_submit(array &$form, FormStateInterface $form_state) {
+  $email = $form_state->getValue('mail');
+
+  if (!empty($email)) {
+    $otp = rand(100000, 999999);
+    \Drupal::state()->set('workflow_email_otp_' . $email, $otp);
+
+    \Drupal::logger('workflow_email')->notice('Generated OTP: @otp for @email', [
+      '@otp' => $otp, 
+      '@email' => $email
+    ]);
+
+    $session = \Drupal::request()->getSession();
+    $session->set('workflow_email_user_email', $email);
+
+    // Send OTP email
+    workflow_email_send_otp($email, $otp);
+
+    // Redirect to OTP verification page
+    $form_state->setRedirect('workflow_email.verify');
+  } else {
+    \Drupal::messenger()->addError(t('Email is required.'));
+  }
+}
+
+/**
+ * Function to send OTP email.
+ */
+function workflow_email_send_otp($email, $otp) {
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'workflow_email';
+  $key = 'send_otp';
+  $to = $email;
+  $params['message'] = "Your OTP for registration is: $otp";
+  $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+  $send = true;
+
+  $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+}
+
+/**
+ * Implements hook_mail().
+ */
+function workflow_email_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_otp':
+      $message['subject'] = t('Your OTP for Registration');
+      $message['body'][] = $params['message'];
+      break;
+  }
+}

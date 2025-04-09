@@ -29,7 +29,7 @@ function custom_message_form_alter(array &$form, FormStateInterface $form_state,
 function custom_message_post_registration($form, FormStateInterface $form_state)
 {
   \Drupal::messenger()->deleteByType('status');
-  \Drupal::messenger()->addStatus(t('Welcome! Your registration has been successfully completed.'));
+  \Drupal::messenger()->addStatus(t('Please check your mail for  OTP.'));
 }
 
 

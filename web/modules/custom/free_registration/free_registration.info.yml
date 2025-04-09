@@ -1,8 +1,0 @@
-name: NEC Bursary Registration
-type: module
-description: Bursary Upload for anonymous users
-version: 8.x
-package: Custom
-core: 8.x
-core_version_requirement: ^8 || ^9 || ^10
-

@@ -1,0 +1,8 @@
+name: 'Workflow Email'
+type: module
+description: 'Adds email-based OTP verification during user registration.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies:
+  - drupal:smtp
+  - drupal:user

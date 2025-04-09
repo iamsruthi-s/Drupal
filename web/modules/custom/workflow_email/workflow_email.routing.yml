@@ -1,0 +1,15 @@
+workflow_email.verify:
+  path: '/otp-verify'
+  defaults:
+    _form: '\Drupal\workflow_email\Form\OtpVerificationForm'
+    _title: 'Verify OTP'
+  requirements:
+    _permission: 'access content'
+
+workflow_email.set_password:
+  path: '/set-password'
+  defaults:
+    _form: '\Drupal\workflow_email\Form\SetPasswordForm'
+    _title: 'Set Your Password'
+  requirements:
+    _permission: 'access content'
